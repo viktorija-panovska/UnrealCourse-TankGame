@@ -1,2 +1,3 @@
 # UnrealCourse-TankGame
-Section 04 from the Unreal Course - A tank game
+
+Section 04 from the Unreal Course - Creating a tank game
