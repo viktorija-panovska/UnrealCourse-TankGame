@@ -34,6 +34,9 @@ private:
 	// De-projecting the screen position of the crosshair to a world direction
 	bool GetLookDirection(FVector2D ScreenLocation, FVector &LookDirection) const;
 
+	// Line-tracing through the crosshair
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector &HitLocation) const;
+
 
 
 private:
@@ -43,4 +46,6 @@ private:
 	UPROPERTY(EditAnywhere, Category = "CrosshairPosition")
 	float CrosshairLocationY = 0.3333333;
 
+	UPROPERTY(EditAnywhere, Category = "LineTrace")
+	float LineTraceRange = 1000000;
 };

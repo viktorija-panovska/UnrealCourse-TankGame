@@ -13,12 +13,17 @@ class TANKGAME_API ATankAIController : public AAIController
 	GENERATED_BODY()
 	
 protected:
+
+	// Called when the game starts or player is spawned
 	virtual void BeginPlay() override;
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
 
 public:
 	// Get the tank the AI controller is possessing
-	ATank* GetPossessedTank() const;
+	ATank* GetControlledTank() const;
 
 	// Get the tank possessed by the player controller
 	ATank* GetPlayerTank() const;
