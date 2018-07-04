@@ -1,6 +1,9 @@
 #include "TankPlayerController.h"
+#include "Tank.h"
 
 
+
+// Called when the game starts or player is spawned
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -20,6 +23,7 @@ void ATankPlayerController::BeginPlay()
 
 
 
+// Called every frame
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -29,6 +33,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 
 
+// Get the tank the controller is possessing
 ATank* ATankPlayerController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
@@ -79,7 +84,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 // De-projecting the screen position of the crosshair to a world direction
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &LookDirection) const
 {
-	FVector CameraWorldLocation; //temporary
+	FVector CameraWorldLocation;
 
 	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, LookDirection);
 }

@@ -7,7 +7,7 @@
 
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( meta=(BlueprintSpawnableComponent) )
 class TANKGAME_API UTankAimingComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -18,21 +18,17 @@ public:
 	UTankAimingComponent();
 
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
+public:
+	// Aims at the location provided by the tank
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
 	// Setter function for the barrel
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+	void SetBarrelReference(class UTankBarrel* BarrelToSet);
+
+	// Moves the barrel to the desired location
+	void MoveBarrel(FVector AimDirection);
 
 
 private:
-	UStaticMeshComponent* Barrel = nullptr;
+	class UTankBarrel* Barrel = nullptr;
 };

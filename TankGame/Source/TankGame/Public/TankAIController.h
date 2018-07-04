@@ -2,9 +2,9 @@
 
 #include "CoreMinimal.h"
 #include "Engine.h"
-#include "Tank.h"
 #include "AIController.h"
 #include "TankAIController.generated.h"
+
 
 
 UCLASS()
@@ -12,8 +12,8 @@ class TANKGAME_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 	
-protected:
 
+protected:
 	// Called when the game starts or player is spawned
 	virtual void BeginPlay() override;
 
@@ -23,8 +23,8 @@ protected:
 
 public:
 	// Get the tank the AI controller is possessing
-	ATank* GetControlledTank() const;
+	class ATank* GetControlledTank() const;
 
 	// Get the tank possessed by the player controller
-	ATank* GetPlayerTank() const;
+	class ATank* GetPlayerTank() const;
 };

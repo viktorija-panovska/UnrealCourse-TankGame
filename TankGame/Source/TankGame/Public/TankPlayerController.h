@@ -2,9 +2,9 @@
 
 #include "CoreMinimal.h"
 #include "Engine.h"
-#include "Tank.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
+
 
 
 UCLASS()
@@ -23,7 +23,7 @@ protected:
 
 private:
 	// Get the tank the controller is possessing
-	ATank* GetControlledTank() const;
+	class ATank* GetControlledTank() const;
 
 	// Move the tank barrel to aim at the crosshair on the UI
 	void AimTowardsCrosshair();
@@ -36,7 +36,6 @@ private:
 
 	// Line-tracing through the crosshair
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector &HitLocation) const;
-
 
 
 private:

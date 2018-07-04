@@ -1,7 +1,9 @@
 #include "TankAIController.h"
+#include "Tank.h"
 
 
 
+// Called when the game starts or player is spawned
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -31,6 +33,7 @@ void ATankAIController::BeginPlay()
 
 
 
+// Called every frame
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -43,6 +46,7 @@ void ATankAIController::Tick(float DeltaTime)
 
 
 
+// Get the tank the AI controller is possessing
 ATank* ATankAIController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
@@ -50,6 +54,7 @@ ATank* ATankAIController::GetControlledTank() const
 
 
 
+// Get the tank possessed by the player controller
 ATank* ATankAIController::GetPlayerTank() const
 {
 	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();

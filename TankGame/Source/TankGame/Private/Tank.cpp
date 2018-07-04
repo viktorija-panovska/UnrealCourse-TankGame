@@ -1,20 +1,17 @@
 #include "Tank.h"
+#include "TankBarrel.h"
+#include "Tank.h"
+#include "TankAimingComponent.h"
+
 
 
 // Sets default values
 ATank::ATank()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	// Create the aiming component
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
-}
-
-
-
-void ATank::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
-{
-	TankAimingComponent->SetBarrelReference(BarrelToSet);
 }
 
 
@@ -23,15 +20,6 @@ void ATank::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-
-}
-
-
-
-// Called every frame
-void ATank::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 
 }
 
@@ -46,7 +34,15 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 
 
-// Aiming at the location provided by the tank controller
+// Sets up the barrel
+void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
+{
+	TankAimingComponent->SetBarrelReference(BarrelToSet);
+}
+
+
+
+// Aims at the location provided by the tank controller
 void ATank::AimAt(FVector HitLocation)
 {
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
