@@ -28,6 +28,10 @@ public:
 	// Sets up the barrel
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void SetBarrelReference(class UTankBarrel* BarrelToSet);
+
+	// Sets up the turret
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void SetTurretReference(class UTankTurret* TurretToSet);
 	
 	// Aims at the location provided by the tank controller
 	void AimAt(FVector HitLocation);

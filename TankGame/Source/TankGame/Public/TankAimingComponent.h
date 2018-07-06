@@ -25,10 +25,15 @@ public:
 	// Setter function for the barrel
 	void SetBarrelReference(class UTankBarrel* BarrelToSet);
 
+	// Setter function for the turret
+	void SetTurretReference(class UTankTurret* TurretToSet);
+
 	// Moves the barrel to the desired location
 	void MoveBarrel(FVector AimDirection);
 
 
 private:
 	class UTankBarrel* Barrel = nullptr;
+
+	class UTankTurret* Turret = nullptr;
 };

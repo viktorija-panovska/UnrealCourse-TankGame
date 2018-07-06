@@ -1,5 +1,6 @@
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 
 
 
@@ -46,18 +47,23 @@ void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 
 
 
+// Setter function for the turret
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+{
+	Turret = TurretToSet;
+}
+
+
+
 // Moves the barrel to the desired location
 void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 {
 	// Barrel elevation
 	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
-	auto AimAsBarrelRotator = AimDirection.Rotation();
-	auto DeltaAimRotator = AimAsBarrelRotator - BarrelRotation;
-	//
-	//auto Time = GetWorld()->GetTimeSeconds();
-	//UE_LOG(LogTemp, Warning, TEXT("%f:  Barrel is elevating at %f degrees per second"), Time, DeltaAimRotator.Pitch);
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaAimRotator = AimAsRotator - BarrelRotation;
 
 	Barrel->Elevate(DeltaAimRotator.Pitch);
 
-	// TODO Get reference to the turret
+	Turret->Rotate(DeltaAimRotator.Yaw);
 }

@@ -42,6 +42,14 @@ void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 
 
 
+// Sets up the turret
+void ATank::SetTurretReference(UTankTurret* TurretToSet)
+{
+	TankAimingComponent->SetTurretReference(TurretToSet);
+}
+
+
+
 // Aims at the location provided by the tank controller
 void ATank::AimAt(FVector HitLocation)
 {
