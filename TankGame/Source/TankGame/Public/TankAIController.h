@@ -19,12 +19,4 @@ protected:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-
-public:
-	// Get the tank the AI controller is possessing
-	class ATank* GetControlledTank() const;
-
-	// Get the tank possessed by the player controller
-	class ATank* GetPlayerTank() const;
 };

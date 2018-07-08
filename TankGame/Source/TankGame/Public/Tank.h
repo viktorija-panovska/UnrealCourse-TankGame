@@ -36,12 +36,25 @@ public:
 	// Aims at the location provided by the tank controller
 	void AimAt(FVector HitLocation);
 
+	// Fires projectile
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	void Fire();
+
 
 protected:
 	class UTankAimingComponent* TankAimingComponent = nullptr;
 
 
 private:
-	UPROPERTY(EditAnywhere, Category = "Firing")
-	float LaunchSpeed = 100000;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 4000;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	TSubclassOf<class AProjectile> ProjectileBlueprint;
+
+	class UTankBarrel* Barrel = nullptr;   // local barrel reference
+
+	float ReloadTime = 3;  // the time between two shells fired, in seconds
+
+	double LastFireTime;  // the time the last shell was fired, in seconds
 };

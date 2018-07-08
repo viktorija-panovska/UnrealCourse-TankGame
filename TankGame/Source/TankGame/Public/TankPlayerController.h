@@ -39,12 +39,12 @@ private:
 
 
 private:
-	UPROPERTY(EditAnywhere, Category = "CrosshairPosition")
+	UPROPERTY(EditDefaultsOnly, Category = "CrosshairPosition")
 	float CrosshairLocationX = 0.5;
 
-	UPROPERTY(EditAnywhere, Category = "CrosshairPosition")
+	UPROPERTY(EditDefaultsOnly, Category = "CrosshairPosition")
 	float CrosshairLocationY = 0.3333333;
 
-	UPROPERTY(EditAnywhere, Category = "LineTrace")
+	UPROPERTY(EditDefaultsOnly, Category = "LineTrace")
 	float LineTraceRange = 1000000;
 };
