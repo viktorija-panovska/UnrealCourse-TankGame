@@ -14,11 +14,10 @@ class TANKGAME_API UTankTracks : public UStaticMeshComponent
 	
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = "Input")
 	void SetTrackThrottle(float Throttle);
 
 
 private:
 	UPROPERTY(EditDefaultsOnly)
-	float TankMaxDrivingForce = 400000;  // assume the 40 ton tank has an acceleration of 1G
+	float TankMaxDrivingForce = 4000;  // assume the 40 ton tank has an acceleration of 1G
 };
