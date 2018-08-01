@@ -7,6 +7,16 @@
 
 
 
+UENUM()
+enum class EFiringState : uint8
+{
+	Reloading,
+	Aiming,
+	Locked
+};
+
+
+
 UCLASS( meta=(BlueprintSpawnableComponent) )
 class TANKGAME_API UTankAimingComponent : public UActorComponent
 {
@@ -17,8 +27,10 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
+	// Setter function for the barrel and turret
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialize(class UTankBarrel* BarrelToSet, class UTankTurret* TurretToSet);
 
-public:
 	// Aims at the location provided by the tank
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
@@ -30,6 +42,11 @@ public:
 
 	// Moves the barrel to the desired location
 	void MoveBarrel(FVector AimDirection);
+
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "FiringState")
+	EFiringState InitialFiringState = EFiringState::Reloading;
 
 
 private:

@@ -12,11 +12,19 @@ UTankAimingComponent::UTankAimingComponent()
 
 
 
+void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
+{
+	if (!BarrelToSet || !TurretToSet) { return; }
+
+	Barrel = BarrelToSet;
+	Turret = TurretToSet;
+}
+
+
+
 // Aims at the location provided by the tank
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	auto TankName = GetOwner()->GetName();
-
 	if (!Barrel) {return; }
 
 	FVector OutLaunchVelocity;
@@ -52,6 +60,8 @@ void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
 // Moves the barrel to the desired location
 void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 {
+	if (!Barrel || !Turret) { return; }
+
 	// Barrel elevation
 	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();

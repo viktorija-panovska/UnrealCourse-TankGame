@@ -32,6 +32,12 @@ public:
 
 
 private:
+	// Controls the movement of the AI controller - connects to MoveToActor()
+	// Called from the pathfinding logic by the AI controller
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
+
+
+private:
 	class UTankTracks* RightTrack;
 
 	class UTankTracks* LeftTrack;

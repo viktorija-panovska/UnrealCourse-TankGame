@@ -10,14 +10,11 @@
 ATank::ATank()
 {
 	PrimaryActorTick.bCanEverTick = false;
-
-	// Create the aiming component
-	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
 }
 
 
 
-// Called when the game starts or when spawned
+// Called when the game starts or player is spawned
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
@@ -26,35 +23,10 @@ void ATank::BeginPlay()
 
 
 
-// Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-
-
-
-// Sets up the barrel
-void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
-{
-	TankAimingComponent->SetBarrelReference(BarrelToSet);
-	Barrel = BarrelToSet;
-}
-
-
-
-// Sets up the turret
-void ATank::SetTurretReference(UTankTurret* TurretToSet)
-{
-	TankAimingComponent->SetTurretReference(TurretToSet);
-}
-
-
-
 // Aims at the location provided by the tank controller
 void ATank::AimAt(FVector HitLocation)
 {
+	if (!TankAimingComponent) { return; }
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
@@ -63,6 +35,9 @@ void ATank::AimAt(FVector HitLocation)
 // Fires projectile
 void ATank::Fire()
 {
+	// TODO make tank fire only when aiming at player
+
+
 	bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTime;
 
 	if (Barrel && bIsReloaded)

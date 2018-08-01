@@ -17,22 +17,13 @@ private:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	// Called when the game starts or when spawned
+
+protected:
+	// Called when the game starts or player is spawned
 	virtual void BeginPlay() override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-
-public:
-	// Sets up the barrel
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void SetBarrelReference(class UTankBarrel* BarrelToSet);
-
-	// Sets up the turret
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void SetTurretReference(class UTankTurret* TurretToSet);
-	
+public:	
 	// Aims at the location provided by the tank controller
 	void AimAt(FVector HitLocation);
 
@@ -42,7 +33,11 @@ public:
 
 
 protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Setup")
 	class UTankAimingComponent* TankAimingComponent = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Setup")
+	class UTankMovementComponent* TankMovementComponent = nullptr;
 
 
 private:

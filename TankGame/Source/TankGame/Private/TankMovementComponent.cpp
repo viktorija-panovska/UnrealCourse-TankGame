@@ -42,3 +42,17 @@ void UTankMovementComponent::MoveLeft(float Throttle)
 	RightTrack->SetTrackThrottle(-Throttle);
 	LeftTrack->SetTrackThrottle(Throttle);
 }
+
+
+
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
+
+	auto ForwardThrottle = FVector::DotProduct(TankForward, AIForwardIntention);
+	MoveForward(ForwardThrottle);
+
+	auto TurnThrottle = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+	MoveRight(TurnThrottle);
+}
