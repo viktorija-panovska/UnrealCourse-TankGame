@@ -36,9 +36,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Setup")
 	class UTankAimingComponent* TankAimingComponent = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Setup")
-	class UTankMovementComponent* TankMovementComponent = nullptr;
-
 
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")

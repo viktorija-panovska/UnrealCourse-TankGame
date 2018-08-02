@@ -26,7 +26,7 @@ void ATank::BeginPlay()
 // Aims at the location provided by the tank controller
 void ATank::AimAt(FVector HitLocation)
 {
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
@@ -37,10 +37,11 @@ void ATank::Fire()
 {
 	// TODO make tank fire only when aiming at player
 
+	if (!ensure(Barrel)) {	return;	}
 
 	bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTime;
 
-	if (Barrel && bIsReloaded)
+	if (bIsReloaded)
 	{
 		// Spawn projectile at the end of the barrel socket
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("ProjectileSocket")), Barrel->GetSocketRotation(FName("ProjectileSocket")));

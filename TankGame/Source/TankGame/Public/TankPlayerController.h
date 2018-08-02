@@ -24,6 +24,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	class ATank* GetControlledTank() const;
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimingComponent(class UTankAimingComponent* AimingComponentReference);
+
 
 private:
 	// Move the tank barrel to aim at the crosshair on the UI
