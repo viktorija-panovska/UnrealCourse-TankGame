@@ -1,6 +1,7 @@
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "Projectile.h"
 
 
 
@@ -23,7 +24,7 @@ void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* Tur
 
 
 // Aims at the location provided by the tank
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 	if (!ensure(Barrel)) {return; }
 
@@ -41,22 +42,6 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 
 
-// Setter function for the barrel
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
-{
-	Barrel = BarrelToSet;
-}
-
-
-
-// Setter function for the turret
-void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
-{
-	Turret = TurretToSet;
-}
-
-
-
 // Moves the barrel to the desired location
 void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 {
@@ -70,4 +55,26 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 	Barrel->Elevate(DeltaAimRotator.Pitch);
 
 	Turret->Rotate(DeltaAimRotator.Yaw);
+}
+
+
+
+// Fires projectile
+void UTankAimingComponent::Fire()
+{
+	// TODO make tank fire only when aiming at player
+
+	if (!ensure(Barrel && ProjectileBlueprint)) { return; }
+
+	bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTime;
+
+	if (bIsReloaded)
+	{
+		// Spawn projectile at the end of the barrel socket
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("ProjectileSocket")), Barrel->GetSocketRotation(FName("ProjectileSocket")));
+
+		Projectile->LaunchProjectile(LaunchSpeed);
+
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }

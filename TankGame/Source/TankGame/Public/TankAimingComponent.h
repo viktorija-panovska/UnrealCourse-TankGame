@@ -32,16 +32,14 @@ public:
 	void Initialize(class UTankBarrel* BarrelToSet, class UTankTurret* TurretToSet);
 
 	// Aims at the location provided by the tank
-	void AimAt(FVector HitLocation, float LaunchSpeed);
-
-	// Setter function for the barrel
-	void SetBarrelReference(class UTankBarrel* BarrelToSet);
-
-	// Setter function for the turret
-	void SetTurretReference(class UTankTurret* TurretToSet);
+	void AimAt(FVector HitLocation);
 
 	// Moves the barrel to the desired location
 	void MoveBarrel(FVector AimDirection);
+
+	// Fires projectile
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	void Fire();
 
 
 protected:
@@ -53,4 +51,14 @@ private:
 	class UTankBarrel* Barrel = nullptr;
 
 	class UTankTurret* Turret = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 4000;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	TSubclassOf<class AProjectile> ProjectileBlueprint;
+
+	float ReloadTime = 3;  // the time between two shells fired, in seconds
+
+	double LastFireTime;  // the time the last shell was fired, in seconds
 };

@@ -20,10 +20,6 @@ protected:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Get the tank the controller is possessing
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	class ATank* GetControlledTank() const;
-
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(class UTankAimingComponent* AimingComponentReference);
 
