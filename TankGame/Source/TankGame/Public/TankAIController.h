@@ -20,6 +20,15 @@ protected:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void SetPawn(APawn* InPawn) override;
+
+
 private:
-	float AcceptanceRadius = 3000;   // how close the AI tank can get to the player
+	UFUNCTION()
+	void OnPossessedTankDeath();
+
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float AcceptanceRadius = 8000;   // how close the AI tank can get to the player
 };

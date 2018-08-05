@@ -20,6 +20,8 @@ protected:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void SetPawn(APawn* InPawn) override;
+
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(class UTankAimingComponent* AimingComponentReference);
 
@@ -36,6 +38,9 @@ private:
 
 	// Line-tracing through the crosshair
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector &HitLocation) const;
+
+	UFUNCTION()
+	void OnPossessedTankDeath();
 
 
 private:
